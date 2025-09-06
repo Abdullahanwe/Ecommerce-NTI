@@ -29,18 +29,18 @@ export const getAllCategory = asyncHandler(async (req, res, next) => {
 export const getProductsByCategoryName = asyncHandler(async (req, res, next) => {
     const { name } = req.params;
 
-    // 1️⃣ دور على الكاتيجوري بالاسم
+
     const category = await categoryModel.findOne({ name }).lean();
     if (!category) {
         return res.status(404).json({ message: "Category not found" });
     }
 
-    // 2️⃣ هات المنتجات اللي ليها نفس الـ categoryId
+
     const products = await ProductModel.find({ categoryId: category._id })
         .select("name description price images createdAt")
         .lean();
 
-    // 3️⃣ رجّع الريسبونس
+   
     return successResponse({
         res,
         data: {

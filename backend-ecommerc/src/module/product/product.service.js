@@ -38,20 +38,20 @@ export const createProduct = asyncHandler(async (req, res, next) => {
     const { title, description, price, stock, categoryId } = req.body;
     const image = req.file?.filename;
 
-    // دور على الكاتيجوري بالاسم
+   
     const category = await categoryModel.findById(categoryId );
     if (!category) {
         return res.status(404).json({ message: "Category not found" });
     }
 
-    // أنشئ المنتج مع ربطه بالكاتيجوري
+    
     const newProduct = await ProductModel.create({
         title,
         description,
         price,
         stock,
         images: image,
-        categoryId: category._id, // ربط أوتوماتيك بالكاتيجوري
+        categoryId: category._id,
     });
 
     return successResponse({

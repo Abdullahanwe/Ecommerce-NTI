@@ -17,9 +17,7 @@ async function verify(idToken) {
     const client = new OAuth2Client(process.env.WEB_CLIENT_ID);
     const ticket = await client.verifyIdToken({
         idToken,
-        audience: process.env.WEB_CLIENT_ID,  // Specify the WEB_CLIENT_ID of the app that accesses the backend
-        // Or, if multiple clients access the backend:
-        //[WEB_CLIENT_ID_1, WEB_CLIENT_ID_2, WEB_CLIENT_ID_3]
+        audience: process.env.WEB_CLIENT_ID,  
     });
     const payload = ticket.getPayload();
     return payload
